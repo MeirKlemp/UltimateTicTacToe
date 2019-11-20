@@ -17,6 +17,7 @@ class TicTacToe:
             self.win_set = win_set
             self.moves_count = 0
             self.board = [([self.EMPTY] * self.cols) for _ in range(self.rows)]
+            self.winner = None
         else:
             clone = rows
             self.rows = clone.rows
@@ -24,14 +25,37 @@ class TicTacToe:
             self.win_set = clone.win_set
             self.moves_count = clone.moves_count
             self.board = [([self.EMPTY] * self.cols) for _ in range(self.rows)]
+            self.winner = clone.winner
 
             for row in range(self.rows):
                 for col in range(self.cols):
                     self.board[row][col] = clone.board[row][col]
 
+    def check_winner(self):
+        position = self.turn_position()
+        draw = True
+
+        for row in range(self.rows):
+            for col in range(self.cols):
+                if self.board[row][col] == position:
+                    draw = False
+                    for i in range(-1, 2):
+                        for j in range(-1, 2):
+                            if i is j:
+                                continue
+                            for w in range(self.win_set):
+                                if self.in_bounds(self.rows + i, self.cols + j) or self.board[self.rows + i][self.cols + j] != position:
+                                    break
+                            else:
+                                self.winner = position
+                                return
+        if draw:
+            self.winner = self.EMPTY
+
     def set(self, row, col, position):
         if self.in_bounds(row, col) and position != self.EMPTY and self.board[row][col] == self.EMPTY:
             self.board[row][col] = position
+            self.check_winner()
             self.moves_count += 1
             return True
         return False
@@ -45,6 +69,9 @@ class TicTacToe:
 
     def in_bounds(self, row, col):
         return 0 <= row < self.rows and 0 <= col < self.cols
+    
+    def game_over(self):
+        return self.winner is not None
 
     def clone(self):
         return TicTacToe(self)
