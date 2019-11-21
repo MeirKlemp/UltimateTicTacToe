@@ -25,7 +25,6 @@ class Window:
         self.clock = pygame.time.Clock()
         self.fps = get_param("fps", 60)
 
-        self.gfx = Graphics(pygame)
         self.gui_objects = get_param("gui_objects", [])
         self.__quit = False
 
@@ -47,23 +46,22 @@ class Window:
             go.update(self)
 
     def draw(self):
-        self.win.blit()
         for go in self.gui_objects:
-            go.draw(self.gfx)
+            go.draw(Graphics(self.screen.subsurface(pygame.Rect(go.x, go.y, go.width, go.height)), pygame))
 
-        pygame.display.uupdate()
+        pygame.display.update()
 
     def set_size(self, width, height, *args):
         def get_flag(param, flag):
             return flag if param in args else 0
-        flags = get_flag("fullscreen", pygame.FULLSCREEN) | \
-            get_flag("resizeable", pygame.RESIZABLE) | \
-            get_flag("scaled", pygame.SCALED) | \
-            get_flag("double_buffered", pygame.DOUBLEBUF) | \
-            get_flag("opengl", pygame.OPENGL) | \
-            get_flag("noframe", pygame.NOFRAME) 
+        flags = get_flag("FULLSCREEN", pygame.FULLSCREEN) | \
+            get_flag("RESIZABLE", pygame.RESIZABLE) | \
+            get_flag("SCALED", pygame.SCALED) | \
+            get_flag("DOUBLE_BUFFERED", pygame.DOUBLEBUF) | \
+            get_flag("OPENGL", pygame.OPENGL) | \
+            get_flag("NOFRAME", pygame.NOFRAME) 
 
-        self.win = pygame.display.set_mode((width, height), flags)
+        self.screen = pygame.display.set_mode((width, height), flags)
 
     def set_title(self, title):
         pygame.display.set_caption(title)
@@ -76,3 +74,15 @@ class Window:
     
     def quit(self):
         self.__quit = True
+
+class GuiObject:
+    def __init__(self, x, y, width, height):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+
+    def update(self, window):
+        pass
+    def draw(self, gfx):
+        pass

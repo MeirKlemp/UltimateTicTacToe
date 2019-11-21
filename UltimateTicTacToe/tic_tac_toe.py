@@ -1,9 +1,13 @@
-class TicTacToe:
+from gui import GuiObject
+
+class TicTacToe(GuiObject):
     CROSS = 1
     NOUGHT = -1
     EMPTY = 0
 
-    def __init__(self, rows=3, cols=3, win_set=3):
+    def __init__(self, x, y, width, height, rows=3, cols=3, win_set=3):
+
+        GuiObject.__init__(self, x, y, width, height)
 
         if not isinstance(rows, TicTacToe):
 
@@ -75,3 +79,18 @@ class TicTacToe:
 
     def clone(self):
         return TicTacToe(self)
+
+    def update(self, window):
+        pass
+
+    def draw(self, gfx):
+        # background
+        gfx.fill((255, 255, 255))
+
+        # drawing seperation line
+        hori = self.height / self.rows
+        for row in range(1, self.rows):
+            gfx.line((0, hori * row), (self.width, hori * row), (0, 0, 0), 3)
+        verti = self.width / self.cols
+        for col in range(1, self.cols):
+            gfx.line((verti * col, 0), (verti * col, self.height), (0, 0, 0), 3)
