@@ -1,9 +1,11 @@
 from tic_tac_toe import TicTacToe
+from tic_tac_toe_gui import TicTacToeGui
 from gui import Window
 
 def main():
-    game = TicTacToe(0, 0, 500, 500, 10, 10)
-    win = Window(title="Ultimate Tic Tac Toe", flags=["SCALED", "FULLSCREEN"], gui_objects=[game])
+    game = TicTacToe()
+    gui = TicTacToeGui(0, 0, 500, 500, game)
+    win = Window(title="Ultimate Tic Tac Toe", flags=["SCALED", "FULLSCREEN"], gui_objects=[gui])
     win.start()
 
 if __name__ == "__main__":

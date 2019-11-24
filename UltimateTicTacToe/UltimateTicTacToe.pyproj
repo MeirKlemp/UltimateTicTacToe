@@ -22,6 +22,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="animations.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="gfx.py">
       <SubType>Code</SubType>
     </Compile>
@@ -30,6 +33,9 @@
     </Compile>
     <Compile Include="main.py" />
     <Compile Include="tic_tac_toe.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tic_tac_toe_gui.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

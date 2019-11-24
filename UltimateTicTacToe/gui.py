@@ -4,7 +4,9 @@ Using PyGame version 2.0.0
 
 import pygame
 from gfx import Graphics
+import animations
 pygame.init()
+animations.millis = pygame.time.get_ticks
 
 class Window:
 
@@ -37,9 +39,23 @@ class Window:
             for event in pygame.event.get():
                 if event.type is pygame.QUIT:
                     self.quit()
-
+                    
+            self.mouse()
             self.update()
             self.draw()
+
+    def mouse(self):
+        for i in range(len(self.gui_objects) - 1, -1, -1):
+            go = self.gui_objects[i]
+            x, y = pygame.mouse.get_pos()
+
+            x -= go.x
+            y -= go.y
+
+            if go.in_bounds(x, y):
+                if pygame.mouse.get_pressed()[0]:
+                    go.mouse_down(x, y)
+                break
 
     def update(self):
         for go in self.gui_objects:
@@ -82,7 +98,14 @@ class GuiObject:
         self.width = width
         self.height = height
 
+    def in_bounds(self, x, y):
+        return 0 <= x - self.x <= self.width and 0 <= y - self.y <= self.height
+
     def update(self, window):
         pass
     def draw(self, gfx):
+        pass
+    def mouse_down(self, x, y):
+        pass
+    def mouse_up(self, x, y):
         pass
