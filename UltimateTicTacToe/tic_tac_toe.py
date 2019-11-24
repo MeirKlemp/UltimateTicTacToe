@@ -16,9 +16,7 @@ class TicTacToe:
             self.rows = rows
             self.cols = cols
             self.win_set = win_set
-            self.moves_count = 0
-            self.board = [([self.EMPTY] * self.cols) for _ in range(self.rows)]
-            self.winner = None
+            self.new_game()
         else:
             clone = rows
             self.rows = clone.rows
@@ -39,17 +37,19 @@ class TicTacToe:
         for row in range(self.rows):
             for col in range(self.cols):
                 if self.board[row][col] == position:
-                    draw = False
                     for i in range(-1, 2):
                         for j in range(-1, 2):
-                            if i is j:
+                            if i == 0 and j == 0:
                                 continue
-                            for w in range(self.win_set):
-                                if not self.in_bounds(self.rows + i, self.cols + j) or self.board[self.rows + i][self.cols + j] != position:
+                            for w in range(1, self.win_set):
+                                if not self.in_bounds(row + i * w, col + j * w) or self.board[row + i * w][col + j * w] != position:
                                     break
                             else:
                                 self.winner = position
+                                self.win_pos = (row, col, row + i * w, col + j * w)
                                 return
+                elif self.board[row][col] == self.EMPTY:
+                    draw = False
         if draw:
             self.winner = self.EMPTY
 
@@ -76,3 +76,9 @@ class TicTacToe:
 
     def clone(self):
         return TicTacToe(self)
+    
+    def new_game(self):
+        self.moves_count = 0
+        self.board = [([self.EMPTY] * self.cols) for _ in range(self.rows)]
+        self.winner = None
+        self.win_pos = None

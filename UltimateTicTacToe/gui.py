@@ -52,7 +52,7 @@ class Window:
             x -= go.x
             y -= go.y
 
-            if go.in_bounds(x, y):
+            if go.in_bounds(x, y) and go.enabled:
                 if pygame.mouse.get_pressed()[0]:
                     go.mouse_down(x, y)
                 break
@@ -63,7 +63,8 @@ class Window:
 
     def draw(self):
         for go in self.gui_objects:
-            go.draw(Graphics(self.screen.subsurface(pygame.Rect(go.x, go.y, go.width, go.height)), pygame))
+            if go.visible:
+                go.draw(Graphics(self.screen.subsurface(pygame.Rect(go.x, go.y, go.width, go.height)), pygame))
 
         pygame.display.update()
 
@@ -97,6 +98,8 @@ class GuiObject:
         self.y = y
         self.width = width
         self.height = height
+        self.visible = True
+        self.enabled = True
 
     def in_bounds(self, x, y):
         return 0 <= x - self.x <= self.width and 0 <= y - self.y <= self.height
