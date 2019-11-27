@@ -3,6 +3,7 @@ Using PyGame version 2.0.0
 """
 
 import pygame
+import pygame.gfxdraw
 from gfx import Graphics
 import animations
 pygame.init()
@@ -64,7 +65,7 @@ class Window:
     def draw(self):
         for go in self.gui_objects:
             if go.visible:
-                go.draw(Graphics(self.screen.subsurface(pygame.Rect(go.x, go.y, go.width, go.height)), pygame))
+                go.draw(Graphics(self.screen.subsurface(pygame.Rect(go.x, go.y, go.width, go.height)), pygame, pygame.gfxdraw))
 
         pygame.display.update()
 

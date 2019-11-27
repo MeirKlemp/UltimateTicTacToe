@@ -23,7 +23,10 @@ class Animation:
         pass
 
     def running(self):
-        return self.__start_ms is not None and not self.finished()
+        return self.started() and not self.finished()
     
     def finished(self):
         return millis() >= self.__end_ms
+
+    def started(self):
+        return self.__start_ms is not None

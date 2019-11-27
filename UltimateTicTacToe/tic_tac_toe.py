@@ -46,7 +46,6 @@ class TicTacToe:
                                     break
                             else:
                                 self.winner = position
-                                self.win_pos = (row, col, row + i * w, col + j * w)
                                 return
                 elif self.board[row][col] == self.EMPTY:
                     draw = False
@@ -81,4 +80,3 @@ class TicTacToe:
         self.moves_count = 0
         self.board = [([self.EMPTY] * self.cols) for _ in range(self.rows)]
         self.winner = None
-        self.win_pos = None
