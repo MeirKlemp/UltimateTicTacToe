@@ -20,6 +20,7 @@ namespace UltimateTicTacToeCS
             uttt = new UltimateTicTacToeGui();
             uttt.Parent = this;
             uttt.Dock = DockStyle.Fill;
+            uttt.SendToBack();
 
             timer.Start();
         }
@@ -27,6 +28,7 @@ namespace UltimateTicTacToeCS
         private void Update(object sender, EventArgs e)
         {
             uttt.Invalidate();
+            pictureBox1.Image = uttt.Draw();
         }
     }
 }
