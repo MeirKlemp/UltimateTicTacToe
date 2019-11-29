@@ -19,8 +19,10 @@ namespace UltimateTicTacToeCS
 
             uttt = new UltimateTicTacToeGui();
             uttt.Parent = this;
-            uttt.Dock = DockStyle.Fill;
+            uttt.Size = Size;
             uttt.SendToBack();
+
+            FrmMain_Resize(this, EventArgs.Empty);
 
             timer.Start();
         }
@@ -28,7 +30,17 @@ namespace UltimateTicTacToeCS
         private void Update(object sender, EventArgs e)
         {
             uttt.Invalidate();
-            pictureBox1.Image = uttt.Draw();
+            pbCanvas.Image = uttt.Draw();
+        }
+
+        private void FrmMain_Resize(object sender, EventArgs e)
+        {
+            int size = Math.Min(Width, Height);
+            foreach (Control control in Controls)
+            {
+                control.Size = new Size(size, size);
+                control.Location = new Point((Width - size) / 2, 0);
+            }
         }
     }
 }
