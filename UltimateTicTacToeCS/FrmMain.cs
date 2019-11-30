@@ -35,7 +35,7 @@ namespace UltimateTicTacToeCS
 
         private void FrmMain_Resize(object sender, EventArgs e)
         {
-            int size = Math.Min(Width, Height);
+            int size = Math.Min(Width - 16, Height - 39);
             foreach (Control control in Controls)
             {
                 control.Size = new Size(size, size);

@@ -147,7 +147,7 @@ namespace UltimateTicTacToeCS
                             }
                         }
                     }
-                    else if (Boards[row, col].Winner == WinState.Draw || Boards[row, col].Winner == WinState.NoOne)
+                    else if (Boards[row, col].Winner == WinState.NoOne)
                     {
                         haveMoves = true;
                     }
