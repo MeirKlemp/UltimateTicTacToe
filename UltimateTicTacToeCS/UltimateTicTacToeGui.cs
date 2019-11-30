@@ -34,7 +34,6 @@ namespace UltimateTicTacToeCS
                     Boards[row, col] = new TicTacToeGui(UltimateTicTacToe.Boards[row, col]);
                     Boards[row, col].Parent = this;
                     Boards[row, col].MouseClickEnabled = false;
-                    Boards[row, col].SelfDraw = false;
                     Boards[row, col].MouseClick += MouseClicked;
                     Boards[row, col].Tag = new int[] { row, col };
                 }
@@ -91,19 +90,22 @@ namespace UltimateTicTacToeCS
 
                 using (var gfx = Graphics.FromImage(bm))
                 {
+                    // Fill Background.
+                    gfx.FillRectangle(new SolidBrush(Options.Theme.Background), 0, 0, Width, Height);
+
                     // Draw speration lines.
                     // Rows.
                     float rowHeight = Height / TicTacToe.ROWS;
                     for (int row = 1; row < TicTacToe.ROWS; row++)
                     {
-                        gfx.DrawLine(new Pen(Brushes.Black, LineWidth), new PointF(0, rowHeight * row), new PointF(Width, rowHeight * row));
+                        gfx.DrawLine(new Pen(new SolidBrush(Options.Theme.Lines), LineWidth), new PointF(0, rowHeight * row), new PointF(Width, rowHeight * row));
                     }
 
                     // Cols.
                     float colWidth = Width / TicTacToe.COLS;
                     for (int col = 1; col < TicTacToe.COLS; col++)
                     {
-                        gfx.DrawLine(new Pen(Brushes.Black, LineWidth), new PointF(colWidth * col, 0), new PointF(colWidth * col, Height));
+                        gfx.DrawLine(new Pen(new SolidBrush(Options.Theme.Lines), LineWidth), new PointF(colWidth * col, 0), new PointF(colWidth * col, Height));
                     }
 
                     // Draw Squares.
@@ -124,11 +126,11 @@ namespace UltimateTicTacToeCS
                     // Draw win animation.
                     if (UltimateTicTacToe.Winner == TicTacToe.WinState.Cross)
                     {
-                        DrawCross(gfx, new RectangleF(0, 0, Width, Height), Color.Blue, WinLineWidth, winAnimation.Value);
+                        DrawCross(gfx, new RectangleF(0, 0, Width, Height), Options.Theme.Cross, WinLineWidth, winAnimation.Value);
                     }
                     else if (UltimateTicTacToe.Winner == TicTacToe.WinState.Nought)
                     {
-                        DrawNought(gfx, new RectangleF(WinLineWidth / 2, WinLineWidth / 2, Width - WinLineWidth, Height - WinLineWidth), Color.Red, WinLineWidth, winAnimation.Value);
+                        DrawNought(gfx, new RectangleF(WinLineWidth / 2, WinLineWidth / 2, Width - WinLineWidth, Height - WinLineWidth), Options.Theme.Nought, WinLineWidth, winAnimation.Value);
                     }
                 }
 
@@ -136,13 +138,6 @@ namespace UltimateTicTacToeCS
             }
 
             return new Bitmap(1, 1);
-        }
-
-        protected override void OnPaint(PaintEventArgs pe)
-        {
-            /*base.OnPaint(pe);
-
-            pe.Graphics.DrawImage(Draw(), new Rectangle(0, 0, Width, Height));*/
         }
 
         private void UltimateTicTacToeGuiMouseClick(object sender, MouseEventArgs e)

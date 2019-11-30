@@ -35,7 +35,7 @@ namespace UltimateTicTacToeCS
         }
 
         public int Duration { get; private set; }
-        public float Value => Started ? (1 - (float)(end - Math.Min(end, OwnTicks)) / Duration) : 0;
+        public float Value => Started ? (Options.UseAnimations ? 1 - (float)(end - Math.Min(end, OwnTicks)) / Duration : 1) : 0;
         public float ReversedValue => 1 - Value;
         public bool Started => end > 0;
         public bool Finished => Ticks >= end;
