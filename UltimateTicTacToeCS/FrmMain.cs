@@ -47,7 +47,7 @@ namespace UltimateTicTacToeCS
             foreach (Control control in Controls)
             {
                 control.Size = new Size(size, size);
-                control.Location = new Point((Width - 16 - size) / 2, 0);
+                control.Location = new Point((FixedSize.Width - size) / 2, 0);
             }
         }
 

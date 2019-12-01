@@ -34,6 +34,7 @@ namespace UltimateTicTacToeCS
                     Boards[row, col] = new TicTacToeGui(UltimateTicTacToe.Boards[row, col]);
                     Boards[row, col].Parent = this;
                     Boards[row, col].MouseClickEnabled = false;
+                    Boards[row, col].ShowLastMove = false;
                     Boards[row, col].MouseClick += MouseClicked;
                     Boards[row, col].Tag = new int[] { row, col };
                 }
@@ -68,10 +69,22 @@ namespace UltimateTicTacToeCS
                 int row = e.Y / (board.Height / TicTacToe.ROWS);
                 int col = e.X / (board.Width / TicTacToe.COLS);
 
+                if (UltimateTicTacToe.LastMove[0] >= 0)
+                {
+                    Boards[UltimateTicTacToe.LastMove[0], UltimateTicTacToe.LastMove[1]].ShowLastMove = false;
+                }
+
                 if (UltimateTicTacToe.Play(index[0], index[1], row, col))
                 {
                     board.Played(row, col);
+
+                    board.ShowLastMove = true;
+
                     Parent.Text = string.Format("Ultimate Tic Tac Toe (Turn: {0}, Moves: {1})", UltimateTicTacToe.GameTurn, UltimateTicTacToe.Moves);
+                }
+                else
+                {
+                    Boards[UltimateTicTacToe.LastMove[0], UltimateTicTacToe.LastMove[1]].ShowLastMove = true;
                 }
 
                 if (UltimateTicTacToe.GameOver)

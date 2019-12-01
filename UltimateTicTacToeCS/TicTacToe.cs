@@ -31,6 +31,7 @@ namespace UltimateTicTacToeCS
         public Turn GameTurn { get; set; }
         public WinState Winner { get; private set; }
         public bool GameOver => Winner != WinState.NoOne;
+        public int[] LastMove { get; private set; }
         public TicTacToe Clone => new TicTacToe(this);
 
         public TicTacToe(TicTacToe clone)
@@ -39,6 +40,7 @@ namespace UltimateTicTacToeCS
             Moves = clone.Moves;
             GameTurn = clone.GameTurn;
             Winner = clone.Winner;
+            LastMove = new int[] { clone.LastMove[0], clone.LastMove[1] };
 
             for (int row = 0; row < ROWS; ++row)
             {
@@ -60,6 +62,7 @@ namespace UltimateTicTacToeCS
             Moves = 0;
             Winner = WinState.NoOne;
             GameTurn = Turn.Cross;
+            LastMove = new int[2] { -1, -1 };
         }
 
         public bool Play(int row, int col)
@@ -69,6 +72,8 @@ namespace UltimateTicTacToeCS
                 Board[row, col] = TurnToSqrState(GameTurn);
                 CheckWin();
                 ++Moves;
+                LastMove[0] = row;
+                LastMove[1] = col;
                 NextTurn();
                 return true;
             }

@@ -14,7 +14,8 @@ namespace UltimateTicTacToeCS
             Cross = Color.Blue,
             Nought = Color.Red,
             AvailableSquare = Color.Orange,
-            Lines = Color.White
+            Lines = Color.White,
+            LastMove = Color.FromArgb(50, 50, 50)
         };
 
         public Color Background { get; set; }
@@ -22,5 +23,6 @@ namespace UltimateTicTacToeCS
         public Color Nought { get; set; }
         public Color AvailableSquare { get; set; }
         public Color Lines { get; set; }
+        public Color LastMove { get; set; }
     }
 }

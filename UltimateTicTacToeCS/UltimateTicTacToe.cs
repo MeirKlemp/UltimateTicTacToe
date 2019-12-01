@@ -27,6 +27,7 @@ namespace UltimateTicTacToeCS
         public Turn GameTurn { get; set; }
         public WinState Winner { get; private set; }
         public bool GameOver => Winner != WinState.NoOne;
+        public int[] LastMove { get; private set; }
         public UltimateTicTacToe Clone => new UltimateTicTacToe(this);
 
         public UltimateTicTacToe(UltimateTicTacToe clone)
@@ -35,6 +36,7 @@ namespace UltimateTicTacToeCS
             PlayableBoards = new bool[ROWS, COLS];
             Winner = clone.Winner;
             GameTurn = clone.GameTurn;
+            LastMove = new int[] { clone.LastMove[0], clone.LastMove[1] };
 
             for (int row = 0; row < ROWS; ++row)
             {
@@ -47,32 +49,34 @@ namespace UltimateTicTacToeCS
         }
         public UltimateTicTacToe()
         {
-            Boards = new TicTacToe[ROWS, COLS];
-            PlayableBoards = new bool[ROWS, COLS];
-            Winner = WinState.NoOne;
-            GameTurn = Turn.Cross;
-
-            for (int row = 0; row < ROWS; ++row)
-            {
-                for (int col = 0; col < COLS; ++col)
-                {
-                    Boards[row, col] = new TicTacToe();
-                    PlayableBoards[row, col] = true;
-                }
-            }
+            NewBoard();
         }
 
         public void NewBoard()
         {
+            if (Boards == null)
+            {
+                Boards = new TicTacToe[ROWS, COLS];
+            }
+
             PlayableBoards = new bool[ROWS, COLS];
             Winner = WinState.NoOne;
             GameTurn = Turn.Cross;
+            LastMove = new int[] { -1, -1 };
 
             for (int row = 0; row < ROWS; ++row)
             {
                 for (int col = 0; col < COLS; ++col)
                 {
-                    Boards[row, col].NewBoard();
+                    if (Boards[row, col] != null)
+                    {
+                        Boards[row, col].NewBoard();
+                    }
+                    else
+                    {
+                        Boards[row, col] = new TicTacToe();
+                    }
+
                     PlayableBoards[row, col] = true;
                 }
             }
@@ -97,6 +101,7 @@ namespace UltimateTicTacToeCS
                             }
                         }
                     }
+                    LastMove = new int[] { boardRow, boardCol };
                     NextTurn();
                     return true;
                 }

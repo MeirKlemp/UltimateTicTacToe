@@ -48,6 +48,7 @@ namespace UltimateTicTacToeCS
 
         public TicTacToe TicTacToe { get; private set; }
         public bool MouseClickEnabled { get; set; }
+        public bool ShowLastMove { get; set; }
 
         private int LineWidth => 3 * Math.Min(Width, Height) / 300;
         private int WinLineWidth => 50 * Math.Min(Width, Height) / 300;
@@ -62,6 +63,7 @@ namespace UltimateTicTacToeCS
             InitializeComponent();
 
             MouseClickEnabled = true;
+            ShowLastMove = true;
             enabled = new Animation(250);
             NewGame();
         }
@@ -121,19 +123,26 @@ namespace UltimateTicTacToeCS
 
                 using (var gfx = Graphics.FromImage(bm))
                 {
+                    float rowHeight = Height / TicTacToe.ROWS;
+                    float colWidth = Width / TicTacToe.COLS;
+
                     // Fill Background.
                     gfx.FillRectangle(new SolidBrush(Options.Theme.Background), 0, 0, Width, Height);
 
+                    // Draw last move.
+                    if (ShowLastMove && TicTacToe.LastMove[0] >= 0)
+                    {
+                        gfx.FillRectangle(new SolidBrush(Options.Theme.LastMove), colWidth * TicTacToe.LastMove[1], rowHeight * TicTacToe.LastMove[0], colWidth, rowHeight);
+                    }
+
                     // Draw speration lines.
                     // Rows.
-                    float rowHeight = Height / TicTacToe.ROWS;
                     for (int row = 1; row < TicTacToe.ROWS; row++)
                     {
                         gfx.DrawLine(new Pen(new SolidBrush(Options.Theme.Lines), LineWidth), new PointF(0, rowHeight * row), new PointF(Width, rowHeight * row));
                     }
 
                     // Cols.
-                    float colWidth = Width / TicTacToe.COLS;
                     for (int col = 1; col < TicTacToe.COLS; col++)
                     {
                         gfx.DrawLine(new Pen(new SolidBrush(Options.Theme.Lines), LineWidth), new PointF(colWidth * col, 0), new PointF(colWidth * col, Height));
