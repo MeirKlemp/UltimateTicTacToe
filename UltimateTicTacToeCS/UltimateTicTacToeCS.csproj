@@ -47,11 +47,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animation.cs" />
+    <Compile Include="BoardControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="BoardControl.Designer.cs">
+      <DependentUpon>BoardControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GuiControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GuiControl.Designer.cs">
+      <DependentUpon>GuiControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImageDrawControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ImageDrawControl.Designer.cs">
+      <DependentUpon>ImageDrawControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Options.cs" />
     <Compile Include="Program.cs" />
