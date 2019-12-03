@@ -11,7 +11,7 @@ using static UltimateTicTacToeCS.TicTacToeGui;
 
 namespace UltimateTicTacToeCS
 {
-    public partial class UltimateTicTacToeGui : BoardControl
+    public partial class UltimateTicTacToeGui : GuiControl
     {
         public UltimateTicTacToe UltimateTicTacToe { get; private set; }
         public TicTacToeGui[,] Boards { get; private set; }

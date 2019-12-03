@@ -25,7 +25,7 @@ namespace UltimateTicTacToeCS
 
             uttt = new UltimateTicTacToeGui();
             uttt.Parent = this;
-            uttt.Size = Size;
+            uttt.Dock = DockStyle.Fill;
             uttt.SendToBack();
 
             BackColor = Options.Theme.Background;
@@ -43,12 +43,12 @@ namespace UltimateTicTacToeCS
 
         private void FrmMain_Resize(object sender, EventArgs e)
         {
-            int size = Math.Min(FixedSize.Width, FixedSize.Height);
+            /*int size = Math.Min(FixedSize.Width, FixedSize.Height);
             foreach (Control control in Controls)
             {
                 control.Size = new Size(size, size);
                 control.Location = new Point((FixedSize.Width - size) / 2, 0);
-            }
+            }*/
         }
 
         private void SetFullScreen(bool full)
