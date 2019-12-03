@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace UltimateTicTacToeCS
 {
-    public partial class TicTacToeGui : BoardControl
+    public partial class TicTacToeGui : GuiControl
     {
         public static void DrawCross(Graphics gfx, RectangleF rect, Color color, int width, float animValue = 1)
         {
