@@ -24,7 +24,7 @@ namespace UltimateTicTacToeCS
             mouseEnter = new Animation(250);
 
             MouseEnter += (sender, e) => mouseEnter.Start();
-            MouseLeave += (sender, e) => mouseEnter = new Animation(250);
+            MouseLeave += (sender, e) => mouseEnter.Reset();
         }
 
         public override Image Draw()

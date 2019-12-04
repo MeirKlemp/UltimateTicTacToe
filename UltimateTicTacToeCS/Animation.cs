@@ -74,5 +74,10 @@ namespace UltimateTicTacToeCS
                 Stopped = false;
             }
         }
+
+        public void Reset()
+        {
+            end = 0;
+        }
     }
 }
