@@ -40,7 +40,7 @@ namespace UltimateTicTacToeCS
         public bool Started => end > 0;
         public bool Finished => Ticks >= end;
         public bool Running => Started && !Finished;
-        public bool Stopped{ get; private set; }
+        public bool Stopped { get; private set; }
         private int OwnTicks => (Stopped ? startStop : Ticks) - stopTicks;
 
         private int end;

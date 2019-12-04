@@ -26,7 +26,7 @@ namespace UltimateTicTacToeCS
 
             if (goBackButton)
             {
-                Menu.Add(new GoBackButton { Parent=this});
+                Menu.Add(new GoBackButton { Parent = this });
             }
 
             Resize += (sender, e) => {
@@ -87,9 +87,9 @@ namespace UltimateTicTacToeCS
 
             DrawBoard();
 
-            foreach (var control in Menu)
+            for (int i = 0; i < Menu.Count; i++)
             {
-                gfx.DrawImage(control.Draw(), control.Bounds);
+                gfx.DrawImage(Menu[i].Draw(), Menu[i].Bounds);
             }
 
             return bm;
