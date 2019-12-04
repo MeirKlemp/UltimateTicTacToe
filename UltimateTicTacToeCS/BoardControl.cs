@@ -17,10 +17,17 @@ namespace UltimateTicTacToeCS
         protected float ColWidth => BoardSize / TicTacToe.COLS;
         public float BoardSize { get; set; }
         public PointF BoardLocation { get; set; }
+        public List<ImageDrawControl> Menu { get; set; }
 
-        public BoardControl()
+        public BoardControl(bool goBackButton = true)
         {
             InitializeComponent();
+            Menu = new List<ImageDrawControl>();
+
+            if (goBackButton)
+            {
+                Menu.Add(new GoBackButton { Parent=this});
+            }
 
             Resize += (sender, e) => {
                 BoardSize = Math.Min(Width, Height);
@@ -29,6 +36,45 @@ namespace UltimateTicTacToeCS
                 if (BoardSize == 0)
                 {
                     BoardSize = 1;
+                }
+
+                var menuBounds = GetMenuBounds();
+
+                if (menuBounds != null)
+                {
+                    if (menuBounds.Value.Height == Height)
+                    {
+                        if (BoardLocation.X < menuBounds.Value.Width)
+                        {
+                            BoardSize = Math.Min(Width - menuBounds.Value.Width, Height);
+                            BoardLocation = new PointF(menuBounds.Value.Width, (Height - BoardSize) / 2);
+                        }
+                    }
+                    else
+                    {
+                        if (BoardLocation.Y < menuBounds.Value.Height)
+                        {
+                            BoardSize = Math.Min(Width, Height - menuBounds.Value.Height);
+                            BoardLocation = new PointF((Width - BoardSize) / 2, menuBounds.Value.Height);
+                        }
+                    }
+
+                    bool onSide = menuBounds.Value.Height == Height;
+                    for (int i = 0; i < Menu.Count; i++)
+                    {
+                        if (onSide)
+                        {
+                            int size = (int)menuBounds.Value.Width;
+                            Menu[i].Location = new Point(0, size * i);
+                            Menu[i].Size = new Size(size, size);
+                        }
+                        else
+                        {
+                            int size = (int)menuBounds.Value.Height;
+                            Menu[i].Location = new Point(size * i, 0);
+                            Menu[i].Size = new Size(size, size);
+                        }
+                    }
                 }
             };
         }
@@ -39,6 +85,36 @@ namespace UltimateTicTacToeCS
         {
             var bm = base.Draw();
 
+            DrawBoard();
+
+            foreach (var control in Menu)
+            {
+                gfx.DrawImage(control.Draw(), control.Bounds);
+            }
+
+            return bm;
+        }
+
+        private RectangleF? GetMenuBounds()
+        {
+            if (Menu.Count > 0)
+            {
+                if (Width > Height)
+                {
+                    float maxHeight = Height / Menu.Count;
+                    float sizeW = Math.Min(Width * .2f, maxHeight);
+                    return new RectangleF(0, 0, sizeW, Height);
+                }
+                float maxWidth = Width / Menu.Count;
+                float sizeH = Math.Min(Height * .2f, maxWidth);
+                return new RectangleF(0, 0, Width, sizeH);
+            }
+
+            return null;
+        }
+
+        private void DrawBoard()
+        {
             // Draw speration lines.
             // Rows.
             for (int row = 1; row < TicTacToe.ROWS; row++)
@@ -68,8 +144,6 @@ namespace UltimateTicTacToeCS
                     DrawSquare(row, col, new RectangleF(sqrLoc, sqrSize));
                 }
             }
-
-            return bm;
         }
     }
 }

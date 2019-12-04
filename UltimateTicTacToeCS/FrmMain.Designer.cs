@@ -59,7 +59,6 @@
             this.DoubleBuffered = true;
             this.Name = "FrmMain";
             this.Text = "Ultimate Tic Tac Toe";
-            this.Resize += new System.EventHandler(this.FrmMain_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.pbCanvas)).EndInit();
             this.ResumeLayout(false);
 

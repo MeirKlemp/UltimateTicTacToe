@@ -8,6 +8,8 @@ namespace UltimateTicTacToeCS
 {
     static class Program
     {
+        public static FrmMain FrmMain { get; private set; }
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -16,7 +18,9 @@ namespace UltimateTicTacToeCS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmMain());
+
+            FrmMain = new FrmMain();
+            Application.Run(FrmMain);
         }
     }
 }

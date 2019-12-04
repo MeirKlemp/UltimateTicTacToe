@@ -11,7 +11,7 @@ using static UltimateTicTacToeCS.TicTacToeGui;
 
 namespace UltimateTicTacToeCS
 {
-    public partial class UltimateTicTacToeGui : GuiControl
+    public partial class UltimateTicTacToeGui : BoardControl
     {
         public UltimateTicTacToe UltimateTicTacToe { get; private set; }
         public TicTacToeGui[,] Boards { get; private set; }
@@ -40,7 +40,7 @@ namespace UltimateTicTacToeCS
             }
 
             winAnimation = new Animation(500);
-            Invalidate();
+            Menu[0].Click += (sender, e) => NewGame();
         }
 
         public void NewGame()
@@ -51,7 +51,7 @@ namespace UltimateTicTacToeCS
             {
                 for (int col = 0; col < TicTacToe.COLS; ++col)
                 {
-                    Boards[row, col].NewGame();
+                    Boards[row, col].NewGame(UltimateTicTacToe.Boards[row, col]);
                 }
             }
 
@@ -109,11 +109,11 @@ namespace UltimateTicTacToeCS
             // Draw win animation.
             if (UltimateTicTacToe.Winner == TicTacToe.WinState.Cross)
             {
-                DrawCross(gfx, new RectangleF(0, 0, Width, Height), Options.Theme.Cross, WinLineWidth, winAnimation.Value);
+                DrawCross(gfx, new RectangleF(BoardLocation, new SizeF(BoardSize, BoardSize)), Options.Theme.Cross, WinLineWidth, winAnimation.Value);
             }
             else if (UltimateTicTacToe.Winner == TicTacToe.WinState.Nought)
             {
-                DrawNought(gfx, new RectangleF(WinLineWidth / 2, WinLineWidth / 2, Width - WinLineWidth, Height - WinLineWidth), Options.Theme.Nought, WinLineWidth, winAnimation.Value);
+                DrawNought(gfx, new RectangleF(BoardLocation.X + WinLineWidth / 2, BoardLocation.Y + WinLineWidth / 2, BoardSize - WinLineWidth, BoardSize - WinLineWidth), Options.Theme.Nought, WinLineWidth, winAnimation.Value);
             }
 
             return bm;
@@ -123,7 +123,7 @@ namespace UltimateTicTacToeCS
         {
             if (UltimateTicTacToe.GameOver)
             {
-                NewGame();
+                //NewGame();
             }
         }
     }

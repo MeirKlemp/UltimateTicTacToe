@@ -12,8 +12,6 @@ namespace UltimateTicTacToeCS
 {
     public partial class FrmMain : Form
     {
-        public Size FixedSize => new Size(Width - (FormBorderStyle == FormBorderStyle.Sizable ? 16 : 0), Height - (FormBorderStyle == FormBorderStyle.Sizable ? 39 : 0));
-
         private UltimateTicTacToeGui uttt;
 
         public FrmMain()
@@ -30,25 +28,13 @@ namespace UltimateTicTacToeCS
 
             BackColor = Options.Theme.Background;
             SetFullScreen(Options.FullScreen);
-            FrmMain_Resize(this, EventArgs.Empty);
 
             timer.Start();
         }
 
         private void Update(object sender, EventArgs e)
         {
-            uttt.Invalidate();
             pbCanvas.Image = uttt.Draw();
-        }
-
-        private void FrmMain_Resize(object sender, EventArgs e)
-        {
-            /*int size = Math.Min(FixedSize.Width, FixedSize.Height);
-            foreach (Control control in Controls)
-            {
-                control.Size = new Size(size, size);
-                control.Location = new Point((FixedSize.Width - size) / 2, 0);
-            }*/
         }
 
         private void SetFullScreen(bool full)

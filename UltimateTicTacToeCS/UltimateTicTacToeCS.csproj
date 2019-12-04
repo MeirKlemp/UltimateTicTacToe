@@ -65,12 +65,6 @@
     <Compile Include="GoBackButton.Designer.cs">
       <DependentUpon>GoBackButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="GuiControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="GuiControl.Designer.cs">
-      <DependentUpon>GuiControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="ImageDrawControl.cs">
       <SubType>Component</SubType>
     </Compile>

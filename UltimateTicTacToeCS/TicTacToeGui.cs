@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace UltimateTicTacToeCS
 {
-    public partial class TicTacToeGui : GuiControl
+    public partial class TicTacToeGui : BoardControl
     {
         public static void DrawCross(Graphics gfx, RectangleF rect, Color color, int width, float animValue = 1)
         {
@@ -71,10 +71,16 @@ namespace UltimateTicTacToeCS
             TicTacToe = board;
         }
 
-        public void NewGame()
+        public void NewGame(TicTacToe ticTacToe = null)
         {
             animations = new Animation[TicTacToe.ROWS, TicTacToe.COLS];
-            TicTacToe = new TicTacToe();
+            if (ticTacToe == null)
+            {
+                TicTacToe = new TicTacToe();
+            }else
+            {
+                TicTacToe = ticTacToe;
+            }
             sqrMouse = new Point(-1, -1);
 
             for (int row = 0; row < TicTacToe.ROWS; ++row)
@@ -129,11 +135,11 @@ namespace UltimateTicTacToeCS
             // Draw win animation.
             if (TicTacToe.Winner == TicTacToe.WinState.Cross)
             {
-                DrawCross(gfx, new RectangleF(0, 0, Width, Height), Options.Theme.Cross, WinLineWidth, winAnimation.Value);
+                DrawCross(gfx, new RectangleF(BoardLocation, new SizeF(BoardSize, BoardSize)), Options.Theme.Cross, WinLineWidth, winAnimation.Value);
             }
             else if (TicTacToe.Winner == TicTacToe.WinState.Nought)
             {
-                DrawNought(gfx, new RectangleF(WinLineWidth / 2, WinLineWidth / 2, Width - WinLineWidth, Height - WinLineWidth), Options.Theme.Nought, WinLineWidth, winAnimation.Value);
+                DrawNought(gfx, new RectangleF(BoardLocation.X + WinLineWidth / 2, BoardLocation.Y + WinLineWidth / 2, BoardSize - WinLineWidth, BoardSize - WinLineWidth), Options.Theme.Nought, WinLineWidth, winAnimation.Value);
             }
 
             return bm;

@@ -15,11 +15,14 @@ namespace UltimateTicTacToeCS
         public GoBackButton()
         {
             InitializeComponent();
+            BackColor = Color.Red;
         }
 
         public override Image Draw()
         {
-            return base.Draw();
+            var bm = base.Draw();
+
+            return bm;
         }
     }
 }
