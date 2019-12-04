@@ -30,7 +30,7 @@ namespace UltimateTicTacToeCS
             {
                 for (int col = 0; col < TicTacToe.COLS; ++col)
                 {
-                    Boards[row, col] = new TicTacToeGui(UltimateTicTacToe.Boards[row, col]);
+                    Boards[row, col] = new TicTacToeGui(UltimateTicTacToe.Boards[row, col], false);
                     Boards[row, col].Parent = this;
                     Boards[row, col].MouseClickEnabled = false;
                     Boards[row, col].ShowLastMove = false;

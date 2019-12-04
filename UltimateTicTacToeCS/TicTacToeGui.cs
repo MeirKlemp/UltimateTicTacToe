@@ -57,7 +57,7 @@ namespace UltimateTicTacToeCS
         private Animation mouseOn;
         private Point sqrMouse;
 
-        public TicTacToeGui()
+        public TicTacToeGui(bool goBackButton = true) : base(goBackButton)
         {
             InitializeComponent();
 
@@ -66,7 +66,7 @@ namespace UltimateTicTacToeCS
             enabled = new Animation(250);
             NewGame();
         }
-        public TicTacToeGui(TicTacToe board) : this()
+        public TicTacToeGui(TicTacToe board, bool goBackButton = true) : this(goBackButton)
         {
             TicTacToe = board;
         }

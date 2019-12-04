@@ -59,6 +59,12 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="GoBackButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GoBackButton.Designer.cs">
+      <DependentUpon>GoBackButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="GuiControl.cs">
       <SubType>Component</SubType>
     </Compile>

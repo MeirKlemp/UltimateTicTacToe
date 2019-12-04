@@ -14,10 +14,15 @@ namespace UltimateTicTacToeCS
     {
         public List<ImageDrawControl> Menu { get; set; }
 
-        public GuiControl()
+        public GuiControl(bool goBackButton = true)
         {
             InitializeComponent();
             Menu = new List<ImageDrawControl>();
+
+            if (goBackButton)
+            {
+                Menu.Add(new GoBackButton());
+            }
         }
 
         public override Image Draw()
@@ -46,6 +51,11 @@ namespace UltimateTicTacToeCS
 
             var bm = base.Draw();
 
+            if (headerBounds != null)
+            {
+                gfx.FillRectangle(Brushes.Blue, headerBounds.Value);
+            }
+
             return bm;
         }
 
@@ -55,9 +65,13 @@ namespace UltimateTicTacToeCS
             {
                 if (Width > Height)
                 {
-                    return new RectangleF(0, 0, Width * .2f, Height);
+                    float maxHeight = Height / Menu.Count;
+                    float sizeW = Math.Min(Width * .2f, maxHeight);
+                    return new RectangleF(0, 0, sizeW, Height);
                 }
-                return new RectangleF(0, 0, Width, Height * .2f);
+                float maxWidth = Width / Menu.Count;
+                float sizeH = Math.Min(Height * .2f, maxWidth);
+                return new RectangleF(0, 0, Width, sizeH);
             }
 
             return null;
