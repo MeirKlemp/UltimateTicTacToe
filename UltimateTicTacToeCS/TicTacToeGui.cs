@@ -133,6 +133,8 @@ namespace UltimateTicTacToeCS
             var bm = base.Draw();
 
             // Draw win animation.
+            gfx.SetClip(new RectangleF(BoardLocation, new SizeF(BoardSize, BoardSize)));
+
             if (TicTacToe.Winner == TicTacToe.WinState.Cross)
             {
                 DrawCross(gfx, new RectangleF(BoardLocation, new SizeF(BoardSize, BoardSize)), Options.Theme.Cross, WinLineWidth, winAnimation.Value);
@@ -141,6 +143,8 @@ namespace UltimateTicTacToeCS
             {
                 DrawNought(gfx, new RectangleF(BoardLocation.X + WinLineWidth / 2, BoardLocation.Y + WinLineWidth / 2, BoardSize - WinLineWidth, BoardSize - WinLineWidth), Options.Theme.Nought, WinLineWidth, winAnimation.Value);
             }
+
+            gfx.ResetClip();
 
             return bm;
         }

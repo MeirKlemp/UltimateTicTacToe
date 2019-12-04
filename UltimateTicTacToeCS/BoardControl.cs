@@ -27,6 +27,10 @@ namespace UltimateTicTacToeCS
             if (goBackButton)
             {
                 Menu.Add(new GoBackButton { Parent = this });
+                Menu.Add(new GoBackButton { Parent = this });
+                Menu.Add(new GoBackButton { Parent = this });
+                Menu.Add(new GoBackButton { Parent = this });
+                Menu.Add(new GoBackButton { Parent = this });
             }
 
             Resize += (sender, e) => {

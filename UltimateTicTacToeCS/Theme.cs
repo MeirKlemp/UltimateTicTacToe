@@ -15,7 +15,9 @@ namespace UltimateTicTacToeCS
             Nought = Color.Red,
             AvailableSquare = Color.Orange,
             Lines = Color.White,
-            LastMove = Color.FromArgb(50, 50, 50)
+            LastMove = Color.FromArgb(50, 50, 50),
+            ButtonHighlight = Color.FromArgb(50, 50, 50),
+            ButtonMain = Color.White,
         };
 
         public Color Background { get; set; }
@@ -24,5 +26,7 @@ namespace UltimateTicTacToeCS
         public Color AvailableSquare { get; set; }
         public Color Lines { get; set; }
         public Color LastMove { get; set; }
+        public Color ButtonHighlight { get; set; }
+        public Color ButtonMain { get; set; }
     }
 }

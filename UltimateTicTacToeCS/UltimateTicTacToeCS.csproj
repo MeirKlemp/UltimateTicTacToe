@@ -82,6 +82,12 @@
     <Compile Include="TicTacToeGui.Designer.cs">
       <DependentUpon>TicTacToeGui.cs</DependentUpon>
     </Compile>
+    <Compile Include="TurnSign.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TurnSign.Designer.cs">
+      <DependentUpon>TurnSign.cs</DependentUpon>
+    </Compile>
     <Compile Include="UltimateTicTacToe.cs" />
     <Compile Include="UltimateTicTacToeGui.cs">
       <SubType>Component</SubType>
